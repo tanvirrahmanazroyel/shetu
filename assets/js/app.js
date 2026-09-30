@@ -273,7 +273,12 @@
     U.counters(next);
     wireScroller(next);
     var launcher = $('#navbtn');
-    if (launcher) launcher.classList.toggle('is-low', !$('.tabbar', next));
+    if (launcher) {
+      launcher.classList.toggle('is-low', !$('.tabbar', next));
+      launcher.classList.toggle('on-chat', next.classList.contains('is-chat'));
+      launcher.classList.toggle('on-meet', next.classList.contains('is-meet'));
+      launcher.classList.remove('is-away');
+    }
     if (typeof w.SCREEN_HOOKS[name] === 'function') w.SCREEN_HOOKS[name](next, params || {});
     d.documentElement.scrollTop = 0;
   };
@@ -287,6 +292,20 @@
         bar.classList.toggle('is-stuck', sc.scrollTop > 6);
       }, { passive: true });
     }
+    /* The launcher gets out of the way on the way down and comes back on
+       the way up, the way a native toolbar does. */
+    var btn = $('#navbtn');
+    if (btn) {
+      var last = 0;
+      sc.addEventListener('scroll', function () {
+        var y = sc.scrollTop;
+        if (Math.abs(y - last) > 8) {
+          btn.classList.toggle('is-away', y > last && y > 60);
+          last = y;
+        }
+      }, { passive: true });
+    }
+
     /* parallax for anything that asks for it */
     var pl = $$('[data-parallax]', root);
     if (pl.length) {

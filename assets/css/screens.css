@@ -172,8 +172,7 @@
 
 /* ---------- chat screens ---------- */
 .is-chat .scroller{padding-bottom:10px; display:flex; flex-direction:column; justify-content:flex-end}
-/* A chat owns its foot: the composer is there, so the launcher moves up. */
-.is-chat ~ #navbtn, .device:has(.is-chat) .navbtn{bottom:calc(72px + var(--safe-bottom))}
+
 .is-chat .thread{margin-top:auto}
 
 /* ---------- the family video meeting ---------- */
@@ -216,24 +215,32 @@
 .chip button svg{width:12px; height:12px}
 
 /* ---------- the navigator ----------
-   One button that never leaves. It rides above the tab bar, drops when a
-   screen has none, and opens the index of every screen in the build. */
+   One button that never leaves, and takes as little of the screen as a
+   thing can while still being findable: a 32px disc in the corner, held at
+   half strength until it is touched. It rides above the tab bar, drops
+   when a screen has none, gets out of the way while the page is being
+   scrolled down, and opens the index of every screen in the build. */
 .navbtn{
-  position:absolute; z-index:36; left:16px;
-  bottom:calc(var(--tabbar) + 16px + var(--safe-bottom));
-  width:44px; height:44px; border-radius:15px; display:grid; place-items:center;
-  color:var(--on-brand); background:var(--grad-brand);
-  box-shadow:0 12px 26px -12px color-mix(in srgb, var(--brand) 92%, transparent),
-             0 0 0 3px color-mix(in srgb, var(--ground) 82%, transparent);
+  position:absolute; z-index:36; left:10px;
+  bottom:calc(var(--tabbar) + 10px + var(--safe-bottom));
+  width:32px; height:32px; border-radius:11px; display:grid; place-items:center;
+  color:var(--on-brand); background:var(--grad-brand); opacity:.52;
+  box-shadow:0 6px 14px -8px rgba(0,0,0,.5);
   transition:transform var(--t-mid) var(--e-spring), bottom var(--t-mid) var(--e-out),
-             box-shadow var(--t-mid) ease;
+             opacity var(--t-mid) ease;
   animation:fab-in .55s var(--e-spring) .5s backwards;
 }
-.navbtn.is-low{bottom:calc(16px + var(--safe-bottom))}
-.navbtn:active{transform:scale(.88) rotate(-6deg)}
-.navbtn svg{width:21px; height:21px}
-/* It steps aside for the video meeting, which owns the whole screen. */
-.is-meet ~ #navbtn, .device:has(.is-meet) .navbtn{opacity:.24}
+.navbtn:hover,.navbtn:focus-visible{opacity:1}
+.navbtn:active{opacity:1; transform:scale(.86) rotate(-6deg)}
+.navbtn svg{width:16px; height:16px}
+.navbtn.is-low{bottom:calc(10px + var(--safe-bottom))}
+/* Out of the way while reading, back the moment the page stops or turns. */
+.navbtn.is-away{transform:translateY(160%) scale(.7); opacity:0; pointer-events:none}
+/* It steps aside for the chat's composer and for the video meeting, which
+   owns the whole screen. The router sets these; a :has() selector would
+   have been neater but is younger than the phones this has to run on. */
+.navbtn.on-chat{bottom:calc(64px + var(--safe-bottom))}
+.navbtn.on-meet{opacity:.2}
 
 .navsheet{max-height:88%}
 .navfind{margin-bottom:12px}

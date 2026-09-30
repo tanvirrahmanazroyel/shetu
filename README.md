@@ -17,8 +17,20 @@ subpath (`user.github.io/repo/`) with no configuration.
 python3 -m http.server 8000
 ```
 
-On a phone the app is the viewport. On a wider screen it sits inside a hardware frame so
-it can be shown on a laptop without pretending to be a desktop site.
+On a phone the app **is** the viewport: the shell is pinned to the four corners and the
+page itself never scrolls, so the browser's own chrome sliding away cannot push the tab bar
+off screen. Only the inner body scrolls. On a wider screen the app sits inside a hardware
+frame so it can be shown on a laptop without pretending to be a desktop site.
+
+Checked at 320, 360, 375, 390, 412 and 430 wide and in landscape: no page scroll, no
+horizontal overflow on any of the ~122 screens, and the tab bar always in view. Below
+392px the gutter and type step down; below 352px the tab labels give way to their icons
+and the denser grids drop to two columns. Form fields are held at 16px on touch screens,
+because anything smaller makes iOS zoom in on focus and stay there.
+
+Older browsers are handled rather than assumed: `color-mix()`, `clip-path: path()`, flex
+`gap` and `:has()` each have a fallback or are avoided outright, so an app bar is never
+left transparent on a phone a couple of versions behind.
 
 ## What is in it
 
@@ -34,7 +46,7 @@ One page, a hash router, and ~120 screens across every section of the web app:
 | Admin | dashboard, members, member, photo moderation, moderation, blocked words, verification queue, verification case, payments, pricing (+ edit), offers, coupons (+ edit), success fees, rewards, mail (+ compose, show), stories (+ edit), tips, hero slides, appearance, content, SEO, **Porichoy examples** (the five cards, one form each), problems, closures, export, messenger oversight, help bot, more |
 | Operator | case queue, case, candidate, search |
 
-**The navigator** — the grid button in the bottom-left corner never leaves. It opens a
+**The navigator** — the small grid button in the bottom-left corner never leaves. It opens a
 searchable index of every screen in the build, grouped by section, with the current one
 marked, so any screen is two presses away from any other. (`/` opens it on a keyboard.)
 `#sitemap` lists the same routes as a full page.
