@@ -29,12 +29,25 @@ One page, a hash router, and ~120 screens across every section of the web app:
 | Public | landing, matrimony door, Connect door, search, profile, plans, stories, story, tips, tip, FAQ, about, safety, legal, classifieds (list / show / create), biodata maker, report a problem, sitemap, 404 / 403 / 419 / 500 |
 | Auth | sign in, code sign-in, OTP, register (2 steps), verify email, forgot / reset password, staff sign in, candidate consent (confirm / confirmed / rejected) |
 | Member | dashboard, search, shortlist, profile hub / edit / preview, photos, preferences, biodata, biodata poster, mailbox, thread, requests, notifications, verification (+ document, selfie), privacy, settings, referral, checkout, manual payment, invoices, family, family members, family room, family log |
-| Connect | deck (draggable), people, matches, messenger, chat, profile, notifications, plans, settings |
+| পরিচয় (Porichoy) | the door itself (join panel, five example cards, the wall, the four promises), join / consent, deck (draggable), people, matches, messenger, chat, profile, notifications, plans, settings |
 | Family | dashboard, families, family profile, connection, introductions, introduction, meetings, video meeting, questions, guide, join, joined |
-| Admin | dashboard, members, member, photo moderation, moderation, blocked words, verification queue, verification case, payments, pricing (+ edit), offers, coupons (+ edit), success fees, rewards, mail (+ compose, show), stories (+ edit), tips, hero slides, appearance, content, SEO, porichoy samples, problems, closures, export, messenger oversight, help bot, more |
+| Admin | dashboard, members, member, photo moderation, moderation, blocked words, verification queue, verification case, payments, pricing (+ edit), offers, coupons (+ edit), success fees, rewards, mail (+ compose, show), stories (+ edit), tips, hero slides, appearance, content, SEO, **Porichoy examples** (the five cards, one form each), problems, closures, export, messenger oversight, help bot, more |
 | Operator | case queue, case, candidate, search |
 
-`#sitemap` lists every route as a chip, so the whole thing can be walked through by hand.
+**The navigator** — the grid button in the bottom-left corner never leaves. It opens a
+searchable index of every screen in the build, grouped by section, with the current one
+marked, so any screen is two presses away from any other. (`/` opens it on a keyboard.)
+`#sitemap` lists the same routes as a full page.
+
+### পরিচয় / Porichoy
+
+Porichoy is the product's second door — the dating side — and it has its own page, not just
+a tile. The door carries the join panel (the requirements answered, and what stands in the
+way), the five example cards, the wall drawn between the two products, the four promises
+and how the product works. The cards are **examples and the page says so**: the shipped five
+are blurred silhouettes with invented first names, and the admin screen that sets them
+repeats the rule — never a member, never anyone who could be taken for one. Joining is its
+own screen with its own consent, and leaving is one button in Porichoy settings.
 
 ## Theming
 
@@ -58,7 +71,11 @@ compositor a few layers and the main thread nothing.
 - **Aurora** — four blurred blobs on the brand ramp, behind every sign-in screen
 - **Bokeh** — hexagonal out-of-focus lights, deterministic from a fixed seed, behind the
   landing page and the dashboard
-- **Hearts** — rising, behind the matrimony door, the stories and the requests screen
+- **Love** — ❤️ 💞 💍 🌹 💌 and the rest drifting up behind the landing page, the
+  dashboard, both doors, the stories, the requests and every sign-in screen; each one
+  rises, sways and turns on its own clock, drawn by the platform's own emoji font so
+  nothing is shipped for it
+- **Hearts** — rising CSS hearts, layered under the love field
 - **Ribbons** — flowing luminous bands, behind the plan and guide screens
 - **Globe** and **world map** — slow meridian turn and pulsing member pins
 - **Stack transitions** — forward pushes in from the right and parks the old screen to the

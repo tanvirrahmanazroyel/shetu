@@ -172,6 +172,8 @@
 
 /* ---------- chat screens ---------- */
 .is-chat .scroller{padding-bottom:10px; display:flex; flex-direction:column; justify-content:flex-end}
+/* A chat owns its foot: the composer is there, so the launcher moves up. */
+.is-chat ~ #navbtn, .device:has(.is-chat) .navbtn{bottom:calc(72px + var(--safe-bottom))}
 .is-chat .thread{margin-top:auto}
 
 /* ---------- the family video meeting ---------- */
@@ -212,3 +214,98 @@
 /* ---------- misc ---------- */
 .chip button{display:inline-grid; place-items:center; opacity:.6}
 .chip button svg{width:12px; height:12px}
+
+/* ---------- the navigator ----------
+   One button that never leaves. It rides above the tab bar, drops when a
+   screen has none, and opens the index of every screen in the build. */
+.navbtn{
+  position:absolute; z-index:36; left:16px;
+  bottom:calc(var(--tabbar) + 16px + var(--safe-bottom));
+  width:44px; height:44px; border-radius:15px; display:grid; place-items:center;
+  color:var(--on-brand); background:var(--grad-brand);
+  box-shadow:0 12px 26px -12px color-mix(in srgb, var(--brand) 92%, transparent),
+             0 0 0 3px color-mix(in srgb, var(--ground) 82%, transparent);
+  transition:transform var(--t-mid) var(--e-spring), bottom var(--t-mid) var(--e-out),
+             box-shadow var(--t-mid) ease;
+  animation:fab-in .55s var(--e-spring) .5s backwards;
+}
+.navbtn.is-low{bottom:calc(16px + var(--safe-bottom))}
+.navbtn:active{transform:scale(.88) rotate(-6deg)}
+.navbtn svg{width:21px; height:21px}
+/* It steps aside for the video meeting, which owns the whole screen. */
+.is-meet ~ #navbtn, .device:has(.is-meet) .navbtn{opacity:.24}
+
+.navsheet{max-height:88%}
+.navfind{margin-bottom:12px}
+.navfind .input{background:var(--surface-2)}
+.navquick{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:6px}
+.navquick__i{
+  display:flex; flex-direction:column; align-items:center; gap:5px; padding:11px 4px;
+  border-radius:var(--r-md); background:var(--surface-2); border:1px solid var(--line);
+  font-size:.72rem; color:var(--body);
+  transition:transform var(--t-fast) var(--e-spring), background var(--t-fast) ease;
+}
+.navquick__i:active{transform:scale(.94); background:var(--brand-tint)}
+.navquick__i svg{width:19px; height:19px; color:var(--brand)}
+.navgroup{padding-top:14px}
+.navgroup[hidden]{display:none}
+.navgroup__h{display:flex; align-items:center; gap:7px; margin-bottom:8px; color:var(--ink)}
+.navgroup__h svg{width:16px; height:16px; color:var(--brand)}
+.navgroup__h span{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase}
+.navgroup__h i{margin-left:auto; font-style:normal}
+
+/* ---------- পরিচয় door ---------- */
+.joinpanel{
+  margin:18px 0 22px; padding:16px; border-radius:var(--r-lg);
+  background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
+}
+.checks{display:grid; gap:9px; margin:4px 0 12px}
+.checks li{display:flex; gap:10px; align-items:flex-start; font-size:.86rem; line-height:1.45}
+.checks__mark{
+  flex:0 0 auto; width:20px; height:20px; border-radius:99px; display:grid; place-items:center;
+  margin-top:1px;
+}
+.checks__mark svg{width:12px; height:12px}
+.checks li.is-ok .checks__mark{background:color-mix(in srgb,var(--ok) 18%,transparent); color:var(--ok)}
+.checks li.is-bad .checks__mark{background:color-mix(in srgb,var(--warn) 20%,transparent); color:var(--warn)}
+.checks li.is-bad{color:var(--muted)}
+
+/* an example card: blurred until two people agree, and never a member */
+.pcard{width:158px; position:relative}
+.pcard .ph{aspect-ratio:3/4}
+.pcard__veil{
+  position:absolute; z-index:5; top:9px; right:9px; width:28px; height:28px; border-radius:99px;
+  display:grid; place-items:center; color:#fff; background:rgba(0,0,0,.3); backdrop-filter:blur(6px);
+}
+.pcard__veil svg{width:14px; height:14px}
+.pcard .mcard__meta span{display:flex; align-items:center; gap:5px; margin-top:2px}
+.pcard .mcard__meta svg{width:12px; height:12px; opacity:.85}
+
+/* the wall between the two products, drawn */
+.wall{
+  display:grid; gap:0; border-radius:var(--r-lg); overflow:hidden;
+  border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow);
+}
+.wall__side{padding:15px 16px}
+.wall__side .label{margin:8px 0 5px}
+.wall__side p{font-size:.82rem; color:var(--muted); line-height:1.5}
+.wall__side.is-here{background:var(--brand-tint)}
+.wall__side.is-here p{color:var(--body)}
+.wall__ic{
+  width:32px; height:32px; border-radius:11px; display:grid; place-items:center;
+  background:var(--surface-2); color:var(--brand);
+}
+.wall__side.is-here .wall__ic{background:var(--surface); color:var(--brand)}
+.wall__ic svg{width:17px; height:17px}
+.wall__rule{
+  position:relative; height:34px; display:grid; place-items:center;
+  background:repeating-linear-gradient(90deg,
+    var(--line-strong) 0 7px, transparent 7px 14px) center / 100% 2px no-repeat,
+    var(--surface-2);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.wall__rule span{
+  padding:3px 12px; border-radius:99px; background:var(--surface); border:1px solid var(--line);
+  font-family:var(--font-mono); font-size:.64rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted);
+}

@@ -50,6 +50,20 @@
     <!-- the screen stack: the router keeps at most two layers here -->
     <div class="viewport" id="screens"></div>
 
+    <!--
+      The navigator. It lives here rather than in a screen, so every screen
+      has it without drawing it, and it survives the transition between two.
+    -->
+    <button class="navbtn" id="navbtn" data-act="nav" aria-label="সব স্ক্রিন">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/>
+        <rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/>
+        <rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/>
+        <rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/>
+      </svg>
+    </button>
+
     <!-- overlays: sheets and dialogs -->
     <div id="overlay" hidden></div>
     <!-- toasts -->

@@ -509,7 +509,7 @@
     return {
       appbar: abar('কনটেন্ট', 'সর্বসাধারণ পাতাগুলো'),
       body: '<div class="pad"><div class="list rv">' +
-        [['ল্যান্ডিং শিরোনাম', 'home'], ['ম্যাট্রিমনি দরজা', 'matrimony'], ['কানেক্ট দরজা', 'dating'],
+        [['ল্যান্ডিং শিরোনাম', 'home'], ['ম্যাট্রিমনি দরজা', 'matrimony'], ['পরিচয় দরজা', 'dating'],
          ['আমাদের সম্পর্কে', 'about'], ['নিরাপত্তা', 'safety'], ['শর্তাবলি', 'legal'],
          ['প্রশ্নোত্তর', 'faq'], ['সাইন ইন পাতার বাণী', 'login']]
           .map(function (c) { return U.lrow({ title: c[0], sub: '/' + c[1], icon: 'doc', act: 'editcontent' }); }).join('') +
@@ -534,14 +534,42 @@
     };
   };
 
+  /* The five example cards on the Porichoy door, one form each. A slot the
+     admin has not touched shows the shipped silhouette and says so. The rule
+     beside the upload is the whole rule about what a photograph here may be. */
   S['admin-porichoy'] = function () {
     return {
-      appbar: abar('পরিচয় নমুনা', 'উদাহরণ বায়োডাটা'),
-      body: '<div class="pad"><div class="list rv">' +
-        ['নমুনা ১ — সম্পূর্ণ', 'নমুনা ২ — সংক্ষিপ্ত', 'নমুনা ৩ — প্রবাসী', 'নমুনা ৪ — ইংরেজি'].map(function (t) {
-          return U.lrow({ title: t, sub: 'প্রকাশিত', icon: 'doc', act: 'soon' });
-        }).join('') + '</div>' +
-        '<button class="btn quiet block" style="margin-top:14px" data-act="soon">নমুনা রিসেট করুন</button></div>'
+      appbar: abar('পরিচয়ের উদাহরণ', 'দরজার পাঁচটি কার্ড', U.iconbtn('eye', { go: 'porichoy', label: 'পাতা দেখুন' })),
+      body: '<div class="pad">' +
+        U.notice('<b>কখনও কোনো সদস্য নয়।</b> এখানের ছবি এমন হতে হবে যা দেখানোর অধিকার সাইটের আছে — স্টক ছবি, মডেল, বা সম্মতি দেওয়া কোনো বন্ধু। এই পাতা সবার জন্য খোলা, আর কে পরিচয়ে আছে তা এখান থেকে কারও জানার কথা নয়।', 'warn') +
+        '<div style="display:grid;gap:12px;margin-top:14px">' +
+        D.porichoy.map(function (c, i) {
+          return '<div class="card rv" style="--i:' + i + '"><div class="card__body">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px">' +
+              '<span class="label" style="margin:0">কার্ড ' + U.bn(c.pos) + '</span>' +
+              U.pill(c.own ? 'আপনার' : 'ডিফল্ট অবয়ব', c.own ? 'ok' : null) +
+            '</div>' +
+            '<div style="display:flex;gap:12px;align-items:center;margin-top:12px">' +
+              U.photo({ h: c.h, mono: c.mono, blur: !c.own, cls: 'av lg', alt: 'কার্ড ' + c.pos }) +
+              '<div style="min-width:0"><b style="color:var(--ink)">' + esc(c.name + ', ' + U.bn(c.age)) + '</b>' +
+              '<div class="tiny muted">' + esc(c.city + ' · ' + c.wants) + '</div></div>' +
+            '</div>' +
+            '<div class="row2" style="margin-top:12px">' +
+              U.field({ label: 'নাম', val: c.name }) +
+              U.field({ label: 'বয়স', val: U.bn(c.age) }) +
+            '</div>' +
+            '<div class="row2">' +
+              U.field({ label: 'শহর', val: c.city }) +
+              U.field({ label: 'খুঁজছেন', type: 'select', opts: D.intentions }) +
+            '</div>' +
+            '<div class="uploadbox" data-act="soon"><span>' + ic('image') + '</span><b>ছবি</b>' +
+              '<span class="tiny muted">JPG, PNG বা WebP · খালি রাখলে আগেরটিই থাকবে</span></div>' +
+          '</div>' +
+          '<div class="card__foot" style="display:flex;gap:8px">' +
+            '<button class="btn xs quiet" style="flex:1" data-act="porichoy-reset">অবয়বে ফিরুন</button>' +
+            '<button class="btn xs" style="flex:1" data-act="save">কার্ড সেভ করুন</button>' +
+          '</div></div>';
+        }).join('') + '</div><div style="height:14px"></div></div>'
     };
   };
 
@@ -618,7 +646,8 @@
         ['admin-rewards', 'পুরস্কার', 'star'], ['admin-fees', 'সাফল্য ফি', 'ring2']]],
       ['কনটেন্ট', [['admin-stories', 'গল্প', 'heart'], ['admin-tips', 'পরামর্শ', 'book'],
         ['admin-hero', 'হিরো স্লাইড', 'image'], ['admin-content', 'পাতার লেখা', 'doc'],
-        ['admin-porichoy', 'পরিচয় নমুনা', 'stack'], ['admin-seo', 'এসইও', 'trend']]],
+        ['admin-porichoy', 'পরিচয়ের উদাহরণ', 'stack'], ['porichoy', 'পরিচয় দরজা', 'sparkle'],
+        ['admin-seo', 'এসইও', 'trend']]],
       ['ব্যবস্থা', [['admin-mail', 'মেইল', 'mail'], ['admin-appearance', 'চেহারা', 'sun'],
         ['admin-export', 'রপ্তানি', 'download'], ['admin-help', 'সহায়তা বট', 'help'],
         ['op-cases', 'অপারেটর প্যানেল', 'tools'], ['sitemap', 'সব স্ক্রিন', 'grid']]]
@@ -693,6 +722,13 @@
   };
 
   /* ------------------------------------------------------------ behaviours */
+  w.ACTIONS['porichoy-reset'] = function () {
+    U.dialog({
+      title: 'অবয়বে ফিরবেন?', text: 'এই কার্ডটি আবার ডিফল্ট ঝাপসা অবয়ব হয়ে যাবে।',
+      icon: 'refresh', okLabel: 'ফিরুন'
+    });
+  };
+
   w.ACTIONS.adminfilter = function () {
     U.sheet({
       title: 'ফিল্টার',

@@ -8,7 +8,7 @@
   /* ------------------------------------------------------------ dashboard */
   S.dashboard = S['member-dashboard'] = function () {
     return {
-      mode: 'matri', bg: 'bokeh', tab: 'home', tabGroup: 'matri',
+      mode: 'matri', bg: 'bokeh+love', tab: 'home', tabGroup: 'matri',
       appbar: U.appbar({
         left: '<button class="brandmark" data-go="landing"><span>সে</span></button>',
         title: 'আসসালামু আলাইকুম', sub: D.me.name,
@@ -41,7 +41,7 @@
           '<div class="quick rv" style="--i:3">' +
             [['search', 'খুঁজুন', 'search'], ['doc', 'বায়োডাটা', 'biodata'],
              ['shield', 'যাচাই', 'verification'], ['users', 'পরিবার', 'member-family'],
-             ['bookmark', 'শর্টলিস্ট', 'shortlist'], ['sparkle', 'কানেক্ট', 'connect-deck']]
+             ['bookmark', 'শর্টলিস্ট', 'shortlist'], ['sparkle', 'পরিচয়', 'connect-deck']]
               .map(function (q, i) {
                 return '<button class="quick__i" style="--i:' + i + '" data-go="' + q[2] + '">' +
                   '<span>' + ic(q[0]) + '</span>' + esc(q[1]) + '</button>';
@@ -416,7 +416,7 @@
       }).join('') + '</div>';
     }
     return {
-      mode: 'matri', tab: 'requests', tabGroup: 'matri', bg: 'hearts',
+      mode: 'matri', tab: 'requests', tabGroup: 'matri', bg: 'hearts+love',
       appbar: U.appbar({ title: 'আগ্রহ ও অনুরোধ', sub: '২টি নতুন' }),
       body: '<div class="pad">' + U.seg(['আমাকে পাঠানো', 'আমি পাঠিয়েছি', 'গৃহীত'], 0) +
         '<div data-panel style="margin-top:14px">' + rowsFor('in') + '</div>' +
@@ -551,7 +551,7 @@
           '<span class="label">পণ্য</span>' +
           '<div class="btn-row">' +
             '<button class="btn xs ghost" data-act="mode-matri">ম্যাট্রিমনি</button>' +
-            '<button class="btn xs ghost" data-act="mode-connect">কানেক্ট</button></div>' +
+            '<button class="btn xs ghost" data-act="mode-connect">পরিচয়</button></div>' +
         '</div></div>' +
         U.sechead('নোটিফিকেশন', null) +
         '<div class="card"><div class="card__body">' +
@@ -574,7 +574,7 @@
 
   S.referral = S['member-referral'] = function () {
     return {
-      bg: 'bokeh',
+      bg: 'bokeh+love',
       appbar: U.appbar({ back: true, title: 'রেফারেল' }),
       body: '<div class="pad">' +
         '<div class="card tinted rv"><div class="card__body center">' +

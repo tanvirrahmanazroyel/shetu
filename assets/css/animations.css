@@ -76,6 +76,31 @@
 }
 
 /* ============================================================
+   3b. LOVE — the symbols of it, drifting up behind everything
+   The emoji are drawn by the platform's own font, so they cost nothing to
+   ship and look native on every phone. Each one rises, sways and turns on
+   its own clock; none of them is ever in the way of a press.
+   ============================================================ */
+.lovemoji{
+  will-change:transform, opacity; line-height:1; user-select:none;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.14));
+  animation-name:love-rise; animation-timing-function:linear;
+  animation-iteration-count:infinite;
+}
+@keyframes love-rise{
+  0%  {transform:translate3d(0, 10vh, 0) rotate(-10deg) scale(.82); opacity:0}
+  10% {opacity:var(--o, .5)}
+  32% {transform:translate3d(5vw, -22vh, 0) rotate(8deg) scale(1)}
+  58% {transform:translate3d(-4vw, -52vh, 0) rotate(-7deg) scale(1.06)}
+  86% {opacity:var(--o, .5)}
+  100%{transform:translate3d(4vw, -104vh, 0) rotate(12deg) scale(.92); opacity:0}
+}
+
+/* A single symbol that beats in place, for the empty states and the
+   match note — one heart, not a field of them. */
+.lovebeat{display:inline-block; animation:heartbeat 1.7s ease-in-out infinite}
+
+/* ============================================================
    4. RIBBONS — flowing luminous bands, behind hero panels
    ============================================================ */
 .ribbon{
@@ -254,5 +279,5 @@
     transition-duration:.001ms !important; scroll-behavior:auto !important;
   }
   .rv,.rv-scale,.rv-left,.wordfly > span{opacity:1 !important; transform:none !important}
-  .hex,.heart{display:none}
+  .hex,.heart,.lovemoji{display:none}
 }

@@ -8,7 +8,7 @@
 
   S['family-dashboard'] = function () {
     return {
-      mode: 'matri', tab: 'fhome', tabGroup: 'family', bg: 'bokeh',
+      mode: 'matri', tab: 'fhome', tabGroup: 'family', bg: 'bokeh+love',
       appbar: U.appbar({
         left: '<button class="brandmark" data-go="dashboard"><span>সে</span></button>',
         title: 'পরিবার', sub: 'রহমান পরিবার',
@@ -274,7 +274,7 @@
 
   S['family-accepted'] = function () {
     return {
-      bg: 'hearts',
+      bg: 'hearts+love',
       appbar: U.appbar({ back: true, title: '' }),
       body: '<div class="pad center" style="padding-top:36px">' +
         '<div class="empty"><div class="ic" style="background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)">' +

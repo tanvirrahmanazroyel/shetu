@@ -149,6 +149,11 @@
   background:var(--brand-tint); color:var(--brand)}
 .lrow__ic svg{width:18px; height:18px}
 .chev{width:16px; height:16px; color:var(--muted); flex:0 0 auto}
+/* A row whose subtitle is a sentence rather than a label lets it wrap. */
+.lrow.wrap{align-items:flex-start}
+.lrow.wrap .lrow__txt b,.lrow.wrap .lrow__txt span{white-space:normal; overflow:visible; text-overflow:clip}
+.lrow.wrap .lrow__txt span{line-height:1.45; margin-top:2px}
+.lrow.wrap .lrow__ic{margin-top:2px}
 .lrow.unread{background:color-mix(in srgb, var(--brand-tint) 55%, var(--surface))}
 .lrow.unread::before{content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--action)}
 

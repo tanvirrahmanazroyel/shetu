@@ -8,7 +8,7 @@
 
   function authShell(o) {
     return {
-      bg: o.bg || 'aurora', cls: 'is-auth',
+      bg: o.bg || 'aurora+love', cls: 'is-auth',
       appbar: U.appbar({
         back: o.back !== false, title: '',
         right: U.iconbtn('globe', { act: 'lang' }) + U.iconbtn('moon', { act: 'theme' }),

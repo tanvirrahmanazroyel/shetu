@@ -94,6 +94,110 @@
       '<span class="sb-batt"><span></span></span></span></div>';
   }
 
+  /* ------------------------------------------------------------ the navigator
+     One button that never leaves: wherever you are, it opens the index of
+     every screen in the build and takes you there. It sits in the device
+     rather than in a screen, so no screen has to remember to draw it. */
+  var NAV_GROUPS = [
+    ['সর্বসাধারণ', 'globe', [
+      ['landing', 'ল্যান্ডিং'], ['matrimony', 'ম্যাট্রিমনি'], ['porichoy', 'পরিচয় দরজা'],
+      ['porichoy-join', 'পরিচয়ে যোগ'], ['public-search', 'সার্চ'], ['profile:m1', 'প্রোফাইল'],
+      ['plans', 'প্ল্যান'], ['stories', 'গল্প'], ['story:s1', 'একটি গল্প'], ['tips', 'পরামর্শ'],
+      ['tip:t1', 'একটি পরামর্শ'], ['faq', 'প্রশ্নোত্তর'], ['about', 'সম্পর্কে'], ['safety', 'নিরাপত্তা'],
+      ['legal', 'আইনি'], ['classifieds', 'বিজ্ঞাপন'], ['classified-show:cl1', 'বিজ্ঞাপন বিবরণ'],
+      ['classified-create', 'নতুন বিজ্ঞাপন'], ['biodata-public', 'বায়োডাটা মেকার'],
+      ['problem', 'সমস্যা জানান'], ['sitemap', 'সাইটম্যাপ'],
+      ['e404', '৪০৪'], ['e403', '৪০৩'], ['e419', '৪১৯'], ['e500', '৫০০']]],
+    ['সাইন ইন', 'key', [
+      ['login', 'লগইন'], ['login-code', 'কোডে লগইন'], ['otp', 'ওটিপি'], ['register-1', 'নিবন্ধন ১'],
+      ['register-2', 'নিবন্ধন ২'], ['verify-email', 'ইমেইল যাচাই'], ['password-request', 'পাসওয়ার্ড ভুলে গেছি'],
+      ['password-reset', 'পাসওয়ার্ড বদল'], ['staff-login', 'স্টাফ লগইন'],
+      ['candidate-confirm', 'প্রার্থীর সম্মতি'], ['candidate-confirmed', 'সম্মতি দেওয়া'],
+      ['candidate-rejected', 'সম্মতি নয়']]],
+    ['সদস্য', 'user', [
+      ['dashboard', 'ড্যাশবোর্ড'], ['search', 'সার্চ'], ['shortlist', 'শর্টলিস্ট'],
+      ['profile-hub', 'প্রোফাইল হাব'], ['profile-edit', 'সম্পাদনা'], ['profile-preview', 'প্রিভিউ'],
+      ['photos', 'ছবি'], ['preferences', 'সঙ্গীর পছন্দ'], ['biodata', 'বায়োডাটা'],
+      ['biodata-poster', 'পোস্টার'], ['mailbox', 'বার্তা'], ['thread:th1', 'কথোপকথন'],
+      ['requests', 'অনুরোধ'], ['notifications', 'নোটিফিকেশন'], ['verification', 'যাচাই'],
+      ['verification-document', 'নথি'], ['verification-selfie', 'সেলফি'], ['privacy', 'গোপনীয়তা'],
+      ['settings', 'সেটিংস'], ['referral', 'রেফারেল'], ['checkout', 'চেকআউট'],
+      ['pay-manual', 'ম্যানুয়াল পেমেন্ট'], ['invoices', 'ইনভয়েস'], ['member-family', 'পরিবার'],
+      ['family-members', 'সদস্যের অনুমতি'], ['family-room', 'পারিবারিক কক্ষ'], ['family-log', 'কার্যবিবরণী']]],
+    ['পরিচয়', 'sparkle', [
+      ['connect-deck', 'ডেক'], ['connect-people', 'মানুষ'], ['connect-matches', 'ম্যাচ'],
+      ['connect-messenger', 'চ্যাট'], ['connect-chat:c1', 'কথোপকথন'], ['connect-profile', 'প্রোফাইল'],
+      ['connect-notifications', 'নোটিফিকেশন'], ['connect-plans', 'প্ল্যান'], ['connect-settings', 'সেটিংস']]],
+    ['পরিবার', 'house', [
+      ['family-dashboard', 'ড্যাশবোর্ড'], ['family-families', 'পরিবারসমূহ'], ['family-profile', 'পরিবারের প্রোফাইল'],
+      ['family-connection', 'পরিচয় পর্ব'], ['family-introductions', 'পরিচয়সমূহ'], ['family-introduction', 'অনুরোধ'],
+      ['family-meetings', 'সাক্ষাৎ'], ['family-meet', 'সাক্ষাৎ কক্ষ'], ['family-questions', 'প্রশ্ন'],
+      ['family-guide', 'নির্দেশিকা'], ['family-join', 'যোগ দিন'], ['family-accepted', 'যোগ দেওয়া হয়েছে']]],
+    ['প্রশাসন', 'chart', [
+      ['admin-dashboard', 'ড্যাশবোর্ড'], ['admin-members', 'সদস্য'], ['admin-member', 'সদস্য বিবরণ'],
+      ['admin-member-photos', 'ছবি মডারেশন'], ['admin-moderation', 'মডারেশন'], ['admin-words', 'নিষিদ্ধ শব্দ'],
+      ['admin-verifications', 'যাচাই সারি'], ['admin-verification', 'যাচাই কেস'], ['admin-payments', 'পেমেন্ট'],
+      ['admin-pricing', 'মূল্য'], ['admin-pricing-edit', 'মূল্য সম্পাদনা'], ['admin-offers', 'অফার'],
+      ['admin-coupons', 'কুপন'], ['admin-coupon-edit', 'কুপন সম্পাদনা'], ['admin-fees', 'সাফল্য ফি'],
+      ['admin-rewards', 'পুরস্কার'], ['admin-mail', 'মেইল'], ['admin-mail-compose', 'মেইল লিখুন'],
+      ['admin-mail-show', 'মেইল দেখুন'], ['admin-stories', 'গল্প'], ['admin-story-edit', 'গল্প সম্পাদনা'],
+      ['admin-tips', 'পরামর্শ'], ['admin-hero', 'হিরো স্লাইড'], ['admin-appearance', 'চেহারা'],
+      ['admin-content', 'পাতার লেখা'], ['admin-porichoy', 'পরিচয়ের উদাহরণ'], ['admin-seo', 'এসইও'],
+      ['admin-problems', 'সমস্যা'], ['admin-closures', 'বন্ধের অনুরোধ'], ['admin-export', 'রপ্তানি'],
+      ['admin-messenger', 'মেসেঞ্জার তদারকি'], ['admin-help', 'সহায়তা বট'], ['admin-more', 'আরও']]],
+    ['অপারেটর', 'tools', [
+      ['op-cases', 'কেসসমূহ'], ['op-case', 'একটি কেস'], ['op-candidate', 'প্রার্থী'], ['op-search', 'কেস সার্চ']]]
+  ];
+
+  function navSheet() {
+    var here = App.stack.length ? App.stack[App.stack.length - 1].name : '';
+    var body =
+      '<div class="navfind">' +
+        '<span class="field-icon">' + w.ic('search') +
+        '<input class="input" placeholder="স্ক্রিন খুঁজুন…" data-navfind autocomplete="off"></span>' +
+      '</div>' +
+      '<div class="navquick">' +
+        [['landing', 'home', 'ল্যান্ডিং'], ['dashboard', 'grid', 'সদস্য'],
+         ['porichoy', 'sparkle', 'পরিচয়'], ['family-dashboard', 'house', 'পরিবার'],
+         ['admin-dashboard', 'chart', 'প্রশাসন'], ['login', 'key', 'সাইন ইন']]
+          .map(function (q) {
+            return '<button class="navquick__i" data-go="' + q[0] + '" data-close>' +
+              w.ic(q[1]) + '<span>' + q[2] + '</span></button>';
+          }).join('') +
+      '</div>' +
+      NAV_GROUPS.map(function (g) {
+        return '<div class="navgroup" data-navgroup>' +
+          '<div class="navgroup__h">' + w.ic(g[1]) + '<span>' + g[0] + '</span>' +
+          '<i class="tiny muted">' + U.bn(g[2].length) + '</i></div>' +
+          '<div class="chips">' + g[2].map(function (r) {
+            return '<button class="chip' + (r[0].split(':')[0] === here ? ' is-on' : '') +
+              '" data-go="' + r[0] + '" data-close data-navitem>' + U.esc(r[1]) + '</button>';
+          }).join('') + '</div></div>';
+      }).join('');
+
+    U.sheet({ title: 'সব স্ক্রিন', body: body, cls: 'navsheet' });
+
+    var host = U.$('#overlay');
+    var find = U.$('[data-navfind]', host);
+    if (find) {
+      find.addEventListener('input', function () {
+        var q = find.value.trim().toLowerCase();
+        $$('[data-navgroup]', host).forEach(function (g) {
+          var shown = 0;
+          $$('[data-navitem]', g).forEach(function (b) {
+            var hit = !q || b.textContent.toLowerCase().indexOf(q) > -1 ||
+              (b.dataset.go || '').toLowerCase().indexOf(q) > -1;
+            b.hidden = !hit;
+            if (hit) shown++;
+          });
+          g.hidden = shown === 0;
+        });
+      });
+      setTimeout(function () { find.focus(); }, 420);
+    }
+  }
+  App.navSheet = navSheet;
+
   /* ------------------------------------------------------------ backgrounds */
   function bgFor(kind) {
     if (!kind) return '';
@@ -101,7 +205,12 @@
     if (kind === 'bokeh') return U.bgBokeh();
     if (kind === 'hearts') return U.bgHearts();
     if (kind === 'ribbons') return U.bgRibbons();
+    if (kind === 'love') return U.bgLove();
     if (kind === 'aurora+hearts') return U.bgAurora() + U.bgHearts(8);
+    if (kind === 'aurora+love') return U.bgAurora() + U.bgLove(10);
+    if (kind === 'bokeh+love') return U.bgBokeh(12) + U.bgLove(11);
+    if (kind === 'hearts+love') return U.bgHearts(8) + U.bgLove(12);
+    if (kind === 'ribbons+love') return U.bgRibbons() + U.bgLove(10);
     if (kind === 'bokeh+ribbons') return U.bgRibbons() + U.bgBokeh(12);
     return '';
   }
@@ -163,6 +272,8 @@
     U.reveal(next);
     U.counters(next);
     wireScroller(next);
+    var launcher = $('#navbtn');
+    if (launcher) launcher.classList.toggle('is-low', !$('.tabbar', next));
     if (typeof w.SCREEN_HOOKS[name] === 'function') w.SCREEN_HOOKS[name](next, params || {});
     d.documentElement.scrollTop = 0;
   };
@@ -232,7 +343,7 @@
   var ACTS = {
     'theme': function () { App.toggleTheme(); },
     'mode-matri': function () { App.setMode('matri'); App.tab('dashboard'); U.toast('সেতু ম্যাট্রিমনি', 'ring2'); },
-    'mode-connect': function () { App.setMode('connect'); App.tab('connect-deck'); U.toast('সেতু কানেক্ট', 'sparkle'); },
+    'mode-connect': function () { App.setMode('connect'); App.tab('connect-deck'); U.toast('পরিচয়', 'sparkle'); },
     'signout': function () {
       U.dialog({
         title: 'সাইন আউট করবেন?', text: 'আবার সাইন ইন করলে সব তথ্য আগের মতোই থাকবে।',
@@ -256,6 +367,7 @@
     'soon': function () { U.toast('এটি একটি ডেমো স্ক্রিন', 'info'); },
     'confetti': function () { U.confetti(); },
     'help': function () { if (w.SHEETS.help) w.SHEETS.help(); },
+    'nav': function () { navSheet(); },
     'notif-seen': function () { U.toast('সব পড়া হয়েছে চিহ্নিত', 'check'); },
     'interest': function (el) {
       el.classList.add('is-off');
@@ -292,6 +404,7 @@
        the stack rather than to browser history. */
     d.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { U.closeOverlay(); }
+      if (e.key === '/' && e.target === d.body) { e.preventDefault(); navSheet(); }
       if (e.key === 'Backspace' && e.target === d.body) { e.preventDefault(); App.back(); }
     });
     w.addEventListener('hashchange', function () {

@@ -209,6 +209,30 @@
     return out + '</div>';
   };
 
+  /* The symbols of love, drifting up. Weighted so hearts carry the field
+     and the rest — rings, roses, letters, doves — arrive as punctuation
+     rather than as a sticker sheet. Deterministic, like the bokeh. */
+  U.LOVE = ['\u2764\uFE0F', '\u2764\uFE0F', '\u2764\uFE0F', '\uD83D\uDC95', '\uD83D\uDC96',
+            '\uD83D\uDC9E', '\uD83D\uDC9D', '\uD83D\uDC98', '\uD83C\uDF39', '\uD83D\uDC90',
+            '\uD83D\uDC8D', '\uD83D\uDC8C', '\uD83D\uDD4A\uFE0F', '\u2728'];
+  U.bgLove = function (count, seed) {
+    var rnd = seeded(seed || 19940214), n = count || 14;
+    var out = '<div class="bg" aria-hidden="true">';
+    for (var i = 0; i < n; i++) {
+      var depth = rnd();
+      var size = Math.round(15 + depth * 30);
+      var op = (0.26 + (1 - depth) * 0.4).toFixed(2);
+      var blur = depth > 0.72 ? (depth - 0.72) * 7 : 0;
+      var dur = Math.round(20 + rnd() * 26);
+      var e = U.LOVE[Math.floor(rnd() * U.LOVE.length)];
+      out += '<span class="lovemoji" style="left:' + Math.round(rnd() * 100) + '%;bottom:-8%;font-size:' +
+        size + 'px;--o:' + op + ';opacity:' + op +
+        (blur ? ';filter:blur(' + blur.toFixed(1) + 'px)' : '') +
+        ';animation-duration:' + dur + 's;animation-delay:-' + Math.round(rnd() * dur) + 's">' + e + '</span>';
+    }
+    return out + '</div>';
+  };
+
   U.bgRibbons = function () {
     return '<div class="bg" aria-hidden="true">' +
       '<span class="ribbon ribbon-1"></span><span class="ribbon ribbon-2"></span>' +
@@ -264,7 +288,7 @@
     var host = U.$('#overlay');
     host.innerHTML =
       '<div class="scrim" data-close></div>' +
-      '<div class="sheet" role="dialog" aria-modal="true">' +
+      '<div class="sheet' + (o.cls ? ' ' + o.cls : '') + '" role="dialog" aria-modal="true">' +
         '<span class="sheet__grab"></span>' +
         '<div class="sheet__head"><h3>' + esc(o.title || '') + '</h3>' +
           '<button class="iconbtn" data-close aria-label="বন্ধ">' + w.ic('close') + '</button></div>' +

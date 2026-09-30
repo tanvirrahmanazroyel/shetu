@@ -123,9 +123,13 @@ ul,ol{margin:0; padding:0; list-style:none}
 .scroller{
   flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden;
   -webkit-overflow-scrolling:touch; scroll-behavior:smooth;
-  padding-bottom:calc(var(--tabbar) + 28px + var(--safe-bottom));
+  /* Room at the foot for the navigator, which floats over the body: without
+     it the last button on a screen sits under the launcher and cannot be
+     pressed. */
+  padding-bottom:calc(var(--tabbar) + 74px + var(--safe-bottom));
 }
-.scroller.no-tabbar{padding-bottom:calc(26px + var(--safe-bottom))}
+.scroller.no-tabbar{padding-bottom:calc(78px + var(--safe-bottom))}
+.is-chat .scroller,.is-meet .scroller{padding-bottom:0}
 .pad{padding-left:var(--gutter); padding-right:var(--gutter)}
 
 /* ---------- tab bar ---------- */

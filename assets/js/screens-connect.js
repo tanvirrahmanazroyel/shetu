@@ -24,8 +24,8 @@
     return {
       mode: 'connect', tab: 'deck', tabGroup: 'connect', bg: 'aurora',
       appbar: U.appbar({
-        left: '<button class="brandmark" data-act="mode-matri"><span>সে</span></button>',
-        title: 'সেতু কানেক্ট', sub: 'আজ ৫ জন',
+        left: '<button class="brandmark" data-act="mode-matri" aria-label="ম্যাট্রিমনিতে ফিরুন"><span>সে</span></button>',
+        title: 'পরিচয়', sub: 'আজ পাঁচজন',
         right: U.iconbtn('sliders', { act: 'filter' }) + U.iconbtn('moon', { act: 'theme' })
       }),
       body: '<div class="deck"><div class="deck__stack" data-deck>' + cards + '</div></div>',
@@ -55,7 +55,7 @@
   /* ------------------------------------------------------------ matches */
   S['connect-matches'] = S.matches = function () {
     return {
-      mode: 'connect', tab: 'matches', tabGroup: 'connect', bg: 'hearts',
+      mode: 'connect', tab: 'matches', tabGroup: 'connect', bg: 'hearts+love',
       appbar: U.appbar({ title: 'ম্যাচ', sub: '৪টি নতুন' }),
       body: '<div class="pad">' +
         U.sechead('নতুন ম্যাচ', null) +
@@ -132,7 +132,7 @@
   S['connect-profile'] = function () {
     return {
       mode: 'connect', tab: 'cme', tabGroup: 'connect',
-      appbar: U.appbar({ title: 'আমার কানেক্ট', right: U.iconbtn('settings', { go: 'connect-settings' }) }),
+      appbar: U.appbar({ title: 'আমার পরিচয়', right: U.iconbtn('settings', { go: 'connect-settings' }) }),
       body: '<div class="pad">' +
         '<div class="card rv"><div class="card__body center">' +
           '<span class="av-ring">' + U.photo({ h: 4, mono: 'নু', cls: 'av xl' }) + '</span>' +
@@ -147,12 +147,12 @@
         '</div>' +
         '<div class="stats rv" style="--i:1;margin-top:12px">' +
           U.stat('৪২', 'পছন্দ') + U.stat('৭', 'ম্যাচ') + U.stat('৩', 'চ্যাট') + '</div>' +
-        U.sechead('আপনার কানেক্ট', null) +
+        U.sechead('আপনার পরিচয়', null) +
         '<div class="list rv">' +
           U.lrow({ title: 'ছবি ও বায়ো', icon: 'image', act: 'editconnect' }) +
           U.lrow({ title: 'আগ্রহ ও ট্যাগ', icon: 'tag', act: 'editconnect' }) +
           U.lrow({ title: 'কাকে দেখাব', icon: 'sliders', act: 'filter' }) +
-          U.lrow({ title: 'প্ল্যান', sub: 'কানেক্ট প্লাস', icon: 'crown', go: 'connect-plans' }) +
+          U.lrow({ title: 'প্ল্যান', sub: 'পরিচয় প্লাস', icon: 'crown', go: 'connect-plans' }) +
           U.lrow({ title: 'নোটিফিকেশন', icon: 'bell', go: 'connect-notifications' }) +
           U.lrow({ title: 'ম্যাট্রিমনিতে ফিরুন', icon: 'ring2', act: 'mode-matri' }) +
         '</div><div style="height:14px"></div></div>'
@@ -176,12 +176,12 @@
 
   S['connect-plans'] = function () {
     return {
-      mode: 'connect', bg: 'ribbons',
-      appbar: U.appbar({ back: true, title: 'কানেক্ট প্ল্যান' }),
+      mode: 'connect', bg: 'ribbons+love',
+      appbar: U.appbar({ back: true, title: 'পরিচয় প্ল্যান' }),
       body: '<div class="pad">' +
         '<p class="lede rv">কে আপনাকে পছন্দ করেছে দেখুন, আর প্রতিদিন বেশি মানুষ দেখুন।</p>' +
-        [{ n: 'কানেক্ট ফ্রি', p: '০', per: 'ফ্রি', best: false, y: ['দিনে ১০ জন', 'ম্যাচ হলে চ্যাট'], no: ['কে পছন্দ করেছে', 'সুপার লাইক'] },
-         { n: 'কানেক্ট প্লাস', p: '৫৯০', per: '/ মাস', best: true, y: ['সীমাহীন', 'কে পছন্দ করেছে', 'দিনে ৫ সুপার লাইক', 'ফিরে যাওয়া'], no: [] }]
+        [{ n: 'পরিচয় ফ্রি', p: '০', per: 'ফ্রি', best: false, y: ['দিনে পাঁচজন', 'ম্যাচ হলে চ্যাট'], no: ['কে পছন্দ করেছে', 'সুপার লাইক'] },
+         { n: 'পরিচয় প্লাস', p: '৫৯০', per: '/ মাস', best: true, y: ['সীমাহীন', 'কে পছন্দ করেছে', 'দিনে ৫ সুপার লাইক', 'ফিরে যাওয়া'], no: [] }]
           .map(function (pl, i) {
             return '<div class="plan rv' + (pl.best ? ' best' : '') + '" style="--i:' + i + ';margin-bottom:14px">' +
               '<b style="color:var(--ink);font-size:1.02rem">' + esc(pl.n) + '</b>' +
@@ -197,7 +197,7 @@
   S['connect-settings'] = function () {
     return {
       mode: 'connect',
-      appbar: U.appbar({ back: true, title: 'কানেক্ট সেটিংস' }),
+      appbar: U.appbar({ back: true, title: 'পরিচয় সেটিংস' }),
       body: '<div class="pad">' +
         U.sechead('কাকে দেখাব', null) +
         '<div class="card"><div class="card__body">' +
@@ -213,7 +213,7 @@
           U.sw(true, 'শুধু ম্যাচ হলে বার্তা') +
         '</div></div>' +
         '<button class="btn quiet block" style="margin-top:16px" data-act="mode-matri">' + ic('ring2') + ' ম্যাট্রিমনিতে ফিরুন</button>' +
-        '<button class="btn danger block" style="margin-top:10px" data-act="soon">কানেক্ট প্রোফাইল বন্ধ করুন</button>' +
+        '<button class="btn danger block" style="margin-top:10px" data-act="porichoy-off">পরিচয় প্রোফাইল বন্ধ করুন</button>' +
         '<div style="height:14px"></div></div>'
     };
   };
@@ -287,9 +287,27 @@
     stack.addEventListener('pointercancel', end);
   };
 
+  w.ACTIONS['porichoy-on'] = function () {
+    U.confetti();
+    w.App.setMode('connect');
+    U.dialog({
+      title: 'পরিচয় চালু হয়েছে', icon: 'sparkle', cancel: false, okLabel: 'ডেক খুলুন',
+      text: 'আপনার বিয়ের প্রোফাইল যেমন ছিল তেমনই আছে। এদিকের কিছুই ওদিকে যায় না।',
+      act: 'porichoy-open'
+    });
+  };
+  w.ACTIONS['porichoy-open'] = function () { w.App.tab('connect-deck'); };
+  w.ACTIONS['porichoy-off'] = function () {
+    U.dialog({
+      title: 'পরিচয় বন্ধ করবেন?',
+      text: 'প্রোফাইল, ছবি ও কথোপকথন সাত দিনের মধ্যে মুছে যাবে। আপনার বিয়ের প্রোফাইলে হাত পড়বে না।',
+      icon: 'warn', okLabel: 'বন্ধ করুন'
+    });
+  };
+
   w.ACTIONS.editconnect = function () {
     U.sheet({
-      title: 'কানেক্ট প্রোফাইল',
+      title: 'পরিচয় প্রোফাইল',
       body: U.field({ label: 'বায়ো', type: 'textarea', ph: 'দুই লাইনে নিজের কথা', val: 'চা, পুরোনো বই আর দীর্ঘ হাঁটা।' }) +
         '<span class="label">আগ্রহ</span>' +
         '<div class="chips" data-chips data-multi="1" style="margin-bottom:14px">' +

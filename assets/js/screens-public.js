@@ -41,10 +41,10 @@
             '<span class="door__ic">' + ic('ring2') + '</span>' +
             '<b>সেতু ম্যাট্রিমনি</b><span>পরিবারসহ, বিয়ের জন্য</span>' +
             '<i>' + ic('chev') + '</i></button>' +
-          '<button class="door connect" data-go="dating">' +
+          '<button class="door connect" data-go="porichoy">' +
             '<span class="door__bg"></span>' +
             '<span class="door__ic">' + ic('sparkle') + '</span>' +
-            '<b>সেতু কানেক্ট</b><span>নিজে থেকে পরিচয়</span>' +
+            '<b>পরিচয়</b><span>দিনে পাঁচজন · নিজের শর্তে</span>' +
             '<i>' + ic('chev') + '</i></button>' +
         '</div>' +
 
@@ -96,7 +96,7 @@
       '</div>';
 
     return {
-      bg: 'bokeh', tab: 'ghome', tabGroup: 'guest', cls: 'is-landing',
+      bg: 'bokeh+love', tab: 'ghome', tabGroup: 'guest', cls: 'is-landing',
       appbar: U.appbar({
         left: '<button class="brandmark" data-go="landing"><span>সে</span></button>',
         title: '', sub: '',
@@ -135,7 +135,7 @@
 
   S.matrimony = function () {
     return doorScreen({
-      mode: 'matri', bg: 'hearts', title: 'সেতু ম্যাট্রিমনি',
+      mode: 'matri', bg: 'hearts+love', title: 'সেতু ম্যাট্রিমনি',
       eyebrow: 'বিয়ের জন্য', head: 'পরিবার জানে, পরিবার পাশে',
       lede: 'বায়োডাটা, ভেরিফিকেশন আর পারিবারিক পরিচয় পর্ব — সবই এক জায়গায়।',
       cta: 'register-1', ctaLabel: 'বায়োডাটা তৈরি করুন',
@@ -149,20 +149,139 @@
     });
   };
 
-  S.dating = function () {
-    return doorScreen({
-      mode: 'connect', bg: 'aurora', title: 'সেতু কানেক্ট',
-      eyebrow: 'নিজে থেকে', head: 'ধীরে, সম্মানে, নিজের শর্তে',
-      lede: 'নিজের মতো করে পরিচয় — তবু সেই একই যাচাই আর একই গোপনীয়তা।',
-      cta: 'register-1', ctaLabel: 'কানেক্টে যোগ দিন',
-      steps: [['প্রোফাইল', 'কয়েকটি লাইন, কয়েকটি আগ্রহ'],
-              ['ডেক', 'একজন করে দেখুন, সিদ্ধান্ত আপনার'],
-              ['ম্যাচ', 'দুজনেই হ্যাঁ বললে তবেই চ্যাট'],
-              ['দেখা', 'প্রস্তুত হলে ভিডিওতে কথা']],
-      listTitle: 'কানেক্টে নতুন', listGo: 'connect-people',
-      cards: D.connect.map(function (m, i) { return U.mcard(m, i); }).join(''),
-      note: 'ম্যাচ না হলে কেউ কারও সাথে বার্তা পাঠাতে পারে না।'
-    });
+  /* ------------------------------------------------------------ পরিচয় (Porichoy)
+     The door into the dating side, and the page the product is actually
+     named after.
+
+     The five cards are EXAMPLES, and the page says so. A real Porichoy
+     member can never appear here: the page is public, and who is inside is
+     nobody's business from the outside. The shipped five are blurred
+     silhouettes with invented first names; a card an admin has set shows
+     clear.
+
+     "Five good ones beats five hundred" is not a sentence in a box here —
+     it is the layout, and nobody has to be told there is no infinite scroll
+     because they can see where it stops. */
+  S.dating = S.porichoy = function () {
+    var joinPanel =
+      '<div class="joinpanel rv">' +
+        '<span class="label">যোগ দেওয়ার আগে</span>' +
+        '<ul class="checks">' + D.porichoyChecks.map(function (c) {
+          return '<li class="' + (c[1] ? 'is-ok' : 'is-bad') + '">' +
+            '<span class="checks__mark">' + (c[1] ? ic('check') : ic('clock')) + '</span>' +
+            '<span>' + esc(c[0]) + '</span></li>';
+        }).join('') + '</ul>' +
+        U.notice('চালিয়ে যেতে সেলফি যাচাই সম্পন্ন করুন।', 'bad', 'camera') +
+        '<div class="btn-row" style="margin-top:12px">' +
+          '<button class="btn ghost" data-go="safety">নিরাপত্তা কীভাবে</button>' +
+          '<button class="btn" data-go="porichoy-join">পরিচয়ে যোগ দিন</button>' +
+        '</div>' +
+        '<p class="tiny muted" style="margin-top:12px">' +
+          '<b style="color:var(--ink)">এখানে আলাদা ছবি ব্যবহার করুন।</b> ' +
+          'যে ছবি আপনার বিয়ের প্রোফাইলেও আছে, তা দুটিকে মিলিয়ে ফেলতে পারে। একই ছবি পেলে আমরা সতর্ক করব।' +
+        '</p>' +
+      '</div>';
+
+    return {
+      mode: 'connect', bg: 'aurora+love', tab: 'ghome', tabGroup: 'guest',
+      appbar: U.appbar({
+        back: true, title: 'পরিচয়', sub: 'সেতুর আলাদা দরজা',
+        right: U.iconbtn('moon', { act: 'theme' })
+      }),
+      body:
+        '<div class="pad">' +
+          '<p class="eyebrow rv">পরিচয় · Porichoy</p>' +
+          '<h1 class="wordfly" style="font-size:2.1rem">দিনে পাঁচজন</h1>' +
+          '<p class="lede rv" style="--i:2;margin-top:10px">আলাদা প্রোডাক্ট, আলাদা প্রোফাইল, আলাদা ছবি, আলাদা নিয়ম। যোগ দিতে হলে স্পষ্ট সম্মতি লাগে, আর বেরিয়ে যেতে এক ক্লিক।</p>' +
+          joinPanel +
+
+          '<div class="sechead" style="margin-bottom:6px"><h2 style="font-size:1rem">নমুনা কার্ড</h2></div>' +
+          '<p class="tiny muted rv" style="margin-bottom:12px">দুজনে রাজি হলে ছবি স্পষ্ট হয়। এগুলো কোনো সদস্য নয় — পরিচয়ে কে আছেন তা বাইরে থেকে জানার কিছু নেই।</p>' +
+        '</div>' +
+
+        '<div class="rail">' + D.porichoy.map(function (c, i) {
+          return '<article class="mcard pcard rv" style="--i:' + i + '" aria-hidden="true">' +
+            U.photo({ h: c.h, mono: c.mono, blur: !c.own, alt: 'নমুনা কার্ড ' + c.pos }) +
+            (c.own ? '' : '<span class="pcard__veil">' + ic('lock') + '</span>') +
+            '<span class="mcard__meta"><b>' + esc(c.name + ', ' + U.bn(c.age)) + '</b>' +
+            '<span>' + ic('pin') + ' ' + esc(c.city) + '</span>' +
+            '<span>' + ic('heart') + ' ' + esc(c.wants) + '</span></span></article>';
+        }).join('') + '</div>' +
+
+        '<div class="pad">' +
+          '<div class="chips rv" style="margin-bottom:4px">' +
+            ['শুধু শহর, এলাকা নয়', 'শুধু পরিচয় মুছে ফেলুন', 'কেউ জানে না আপনার দুটোই আছে']
+              .map(function (t) { return '<span class="chip">' + ic('check') + esc(t) + '</span>'; }).join('') +
+          '</div>' +
+
+          /* The wall, drawn. What is being decided on this page is whether
+             the separation is real, and that is a shape before it is a
+             sentence. */
+          U.sechead('দুইয়ের মাঝের দেয়াল', 'নিরাপত্তা', 'safety') +
+          '<div class="wall rv">' +
+            '<div class="wall__side"><span class="wall__ic">' + ic('users') + '</span>' +
+              '<span class="label">' + esc(D.wall.marriage[0]) + '</span>' +
+              '<p>' + esc(D.wall.marriage[1]) + '</p></div>' +
+            '<div class="wall__rule"><span>' + esc(D.wall.between) + '</span></div>' +
+            '<div class="wall__side is-here"><span class="wall__ic">' + ic('lock') + '</span>' +
+              '<span class="label">' + esc(D.wall.here[0]) + '</span>' +
+              '<p>' + esc(D.wall.here[1]) + '</p></div>' +
+          '</div>' +
+
+          U.sechead('চারটি প্রতিশ্রুতি', null) +
+          '<div class="list rv">' + D.porichoyPromises.map(function (p) {
+            return U.lrow({ title: esc(p[0]), sub: esc(p[1]), icon: 'shield', chev: false, cls: 'wrap' });
+          }).join('') + '</div>' +
+
+          U.sechead('পরিচয় কীভাবে চলে', null) +
+          '<div class="feats rv">' + D.porichoyPoints.map(function (p, i) {
+            return '<div class="feat"><span class="feat__ic">' +
+              ic(['stack', 'eyeOff', 'pin', 'trash'][i]) + '</span>' +
+              '<b>' + esc(p[0]) + '</b><p>' + esc(p[1]) + '</p></div>';
+          }).join('') + '</div>' +
+
+          '<div class="card tinted rv" style="margin-top:20px"><div class="card__body center">' +
+            '<span class="lovebeat" style="font-size:1.8rem">\uD83D\uDC9E</span>' +
+            '<h3 style="margin-top:6px">পরিচয় শুরু করুন</h3>' +
+            '<p class="tiny muted" style="margin:6px 0 14px">বিয়ের প্রোফাইল যেমন আছে তেমনই থাকবে।</p>' +
+            '<button class="btn block" data-go="porichoy-join">ফ্রি অ্যাকাউন্ট খুলুন</button>' +
+          '</div></div>' +
+          '<div style="height:14px"></div>' +
+        '</div>'
+    };
+  };
+
+  /* The join step: the one screen where consent is actually given. */
+  S['porichoy-join'] = function () {
+    return {
+      mode: 'connect', bg: 'aurora+love', cls: 'is-auth',
+      appbar: U.appbar({ back: true, title: 'পরিচয়ে যোগ দিন', transparent: true }),
+      body:
+        '<div class="pad authwrap">' +
+          '<div class="authmark rv-scale">' + ic('sparkle') + '</div>' +
+          '<h1 class="rv" style="--i:1">আলাদা একটা প্রোফাইল</h1>' +
+          '<p class="lede rv" style="--i:2;margin:8px 0 18px">পরিচয় আপনার বিয়ের প্রোফাইলের উপরে তৈরি হয় না — এটি সম্পূর্ণ আলাদা। এখান থেকে কিছুই ওদিকে যায় না।</p>' +
+          '<div class="card rv" style="--i:3"><div class="card__body">' +
+            '<span class="label">যা হবে</span>' +
+            '<div class="steps" style="margin-top:10px">' +
+              [['নতুন প্রোফাইল', 'নাম, বয়স, শহর আর কয়েকটি লাইন — নতুন করে।'],
+               ['আলাদা ছবি', 'বিয়ের প্রোফাইলের ছবি এখানে না দেওয়াই ভালো।'],
+               ['দিনে পাঁচজন', 'ম্যাচ হলে তবেই ছবি স্পষ্ট, তবেই কথা।'],
+               ['যেকোনো সময় বন্ধ', 'সাত দিনে মুছে যায়, বিয়ের প্রোফাইলে হাত পড়ে না।']]
+                .map(function (x, i) {
+                  return '<div class="step ' + (i === 0 ? 'now' : '') + '"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>';
+                }).join('') +
+            '</div>' +
+            '<hr class="rule" style="margin:6px 0 4px">' +
+            U.check('আমি বুঝেছি এটি একটি আলাদা প্রোফাইল', false) +
+            U.check('আমার পরিবার বা ঘটক এটি দেখতে পাবেন না — আমি তা চাই', false) +
+            '<button class="btn block" style="margin-top:12px" data-act="porichoy-on">পরিচয় চালু করুন</button>' +
+            '<button class="btn quiet block" style="margin-top:10px" data-back>এখন নয়</button>' +
+          '</div></div>' +
+          '<p class="center tiny muted rv" style="--i:4;margin-top:16px">' +
+            'যেকোনো সময় সেটিংস থেকে বন্ধ করা যাবে।</p>' +
+        '</div>'
+    };
   };
 
   /* ------------------------------------------------------------ public search */
@@ -234,7 +353,7 @@
   /* ------------------------------------------------------------ plans */
   S.plans = function () {
     return {
-      bg: 'ribbons', tab: null,
+      bg: 'ribbons+love', tab: null,
       appbar: U.appbar({ back: true, title: 'প্ল্যান ও মূল্য' }),
       body:
         '<div class="pad">' +
@@ -266,7 +385,7 @@
   /* ------------------------------------------------------------ stories */
   S.stories = function () {
     return {
-      bg: 'hearts', tab: 'gstories', tabGroup: 'guest',
+      bg: 'hearts+love', tab: 'gstories', tabGroup: 'guest',
       appbar: U.appbar({ back: true, title: 'সফল গল্প', sub: '১,২১৪টি বিয়ে' }),
       body:
         '<div class="pad">' +
@@ -515,8 +634,9 @@
 
   S.sitemap = function () {
     var groups = [
-      ['সর্বসাধারণ', [['landing', 'ল্যান্ডিং'], ['matrimony', 'ম্যাট্রিমনি'], ['dating', 'কানেক্ট'],
-        ['public-search', 'সার্চ'], ['plans', 'প্ল্যান'], ['stories', 'গল্প'], ['tips', 'পরামর্শ'],
+      ['সর্বসাধারণ', [['landing', 'ল্যান্ডিং'], ['matrimony', 'ম্যাট্রিমনি'], ['dating', 'পরিচয়'],
+        ['public-search', 'সার্চ'], ['porichoy', 'পরিচয় দরজা'], ['porichoy-join', 'পরিচয়ে যোগ'],
+        ['plans', 'প্ল্যান'], ['stories', 'গল্প'], ['tips', 'পরামর্শ'],
         ['faq', 'প্রশ্নোত্তর'], ['about', 'সম্পর্কে'], ['safety', 'নিরাপত্তা'], ['legal', 'আইনি'],
         ['classifieds', 'বিজ্ঞাপন'], ['problem', 'সমস্যা'], ['biodata-public', 'বায়োডাটা মেকার']]],
       ['সাইন ইন', [['login', 'লগইন'], ['login-code', 'কোডে লগইন'], ['otp', 'ওটিপি'],
@@ -533,7 +653,7 @@
         ['shortlist', 'শর্টলিস্ট'], ['photos', 'ছবি'], ['preferences', 'সঙ্গীর পছন্দ'],
         ['referral', 'রেফারেল'], ['thread:th1', 'কথোপকথন'], ['family-members', 'সদস্যের অনুমতি'],
         ['family-room', 'পারিবারিক কক্ষ'], ['family-log', 'কার্যবিবরণী']]],
-      ['কানেক্ট', [['connect-deck', 'ডেক'], ['connect-people', 'মানুষ'], ['connect-matches', 'ম্যাচ'],
+      ['পরিচয়', [['connect-deck', 'ডেক'], ['connect-people', 'মানুষ'], ['connect-matches', 'ম্যাচ'],
         ['connect-messenger', 'চ্যাট'], ['connect-chat:c1', 'কথোপকথন'], ['connect-profile', 'প্রোফাইল'],
         ['connect-plans', 'প্ল্যান'], ['connect-settings', 'সেটিংস'], ['connect-notifications', 'নোটিফিকেশন']]],
       ['পরিবার', [['family-dashboard', 'ড্যাশবোর্ড'], ['family-families', 'পরিবারসমূহ'],
@@ -551,7 +671,7 @@
         ['admin-tips', 'পরামর্শ'], ['admin-hero', 'হিরো'], ['admin-appearance', 'চেহারা'],
         ['admin-content', 'কনটেন্ট'], ['admin-seo', 'এসইও'], ['admin-words', 'নিষিদ্ধ শব্দ'],
         ['admin-problems', 'সমস্যা'], ['admin-rewards', 'পুরস্কার'], ['admin-closures', 'অ্যাকাউন্ট বন্ধ'],
-        ['admin-export', 'রপ্তানি'], ['admin-porichoy', 'পরিচয় নমুনা'], ['admin-fees', 'সাফল্য ফি'],
+        ['admin-export', 'রপ্তানি'], ['admin-porichoy', 'পরিচয়ের উদাহরণ'], ['admin-fees', 'সাফল্য ফি'],
         ['admin-messenger', 'মেসেঞ্জার'], ['admin-help', 'সহায়তা'], ['admin-more', 'আরও']]],
       ['অপারেটর', [['op-cases', 'কেসসমূহ'], ['op-case', 'কেস'], ['op-candidate', 'প্রার্থী'], ['op-search', 'সার্চ']]],
       ['ত্রুটি', [['e404', '৪০৪'], ['e403', '৪০৩'], ['e419', '৪১৯'], ['e500', '৫০০']]]
