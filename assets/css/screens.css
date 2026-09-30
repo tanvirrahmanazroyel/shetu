@@ -1,0 +1,214 @@
+/* ===========================================================================
+   SheTu Mobile — screen-specific layout
+   =========================================================================== */
+
+/* ---------- brand mark ---------- */
+.brandmark{
+  width:38px; height:38px; flex:0 0 auto; border-radius:12px; display:grid; place-items:center;
+  background:var(--grad-brand); color:var(--on-brand); font-family:var(--font-head); font-size:1rem;
+  box-shadow:0 6px 16px -10px color-mix(in srgb, var(--brand) 90%, transparent);
+  transition:transform var(--t-fast) var(--e-spring);
+}
+.brandmark:active{transform:scale(.9) rotate(-8deg)}
+
+/* ---------- landing hero ---------- */
+.hero{position:relative; padding:12px 0 26px; overflow:hidden}
+.hero__art{display:grid; place-items:center; padding:6px 0 18px; will-change:transform}
+.hero__copy h1{font-size:2.1rem}
+.is-landing .appbar{padding-top:2px}
+
+/* the two product doors */
+.doors{display:grid; gap:12px; margin-top:22px}
+.door{
+  position:relative; overflow:hidden; text-align:left; padding:16px 54px 16px 16px;
+  border-radius:var(--r-lg); border:1px solid var(--line); background:var(--surface);
+  box-shadow:var(--shadow); transition:transform var(--t-fast) var(--e-spring), box-shadow var(--t-mid) ease;
+}
+.door:active{transform:scale(.985); box-shadow:var(--shadow-lift)}
+.door b{display:block; font-family:var(--font-head); font-size:1.08rem; color:var(--ink)}
+.door > span:not(.door__bg):not(.door__ic){display:block; font-size:.8rem; color:var(--muted)}
+.door__ic{
+  width:40px; height:40px; border-radius:13px; display:grid; place-items:center; margin-bottom:10px;
+  background:var(--brand-tint); color:var(--brand);
+}
+.door__ic svg{width:21px; height:21px}
+.door > i{position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--muted)}
+.door > i svg{width:18px; height:18px}
+.door__bg{
+  position:absolute; inset:0; pointer-events:none; opacity:.14;
+  background:radial-gradient(120px 90px at 100% 0%, currentColor, transparent 70%);
+}
+.door.matri{color:var(--matri-brand)}
+.door.matri .door__ic{background:color-mix(in srgb, var(--matri-brand) 14%, transparent); color:var(--matri-brand)}
+.door.connect{color:var(--connect-brand)}
+.door.connect .door__ic{background:color-mix(in srgb, var(--connect-brand) 14%, transparent); color:var(--connect-brand)}
+
+/* the four reasons */
+.feats{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.feat{
+  padding:14px 12px; border-radius:var(--r-md); background:var(--surface);
+  border:1px solid var(--line); box-shadow:var(--shadow);
+}
+.feat__ic{width:34px; height:34px; border-radius:11px; display:grid; place-items:center;
+  background:var(--brand-tint); color:var(--brand); margin-bottom:9px}
+.feat__ic svg{width:18px; height:18px}
+.feat b{display:block; color:var(--ink); font-size:.9rem; margin-bottom:3px}
+.feat p{font-size:.76rem; color:var(--muted); line-height:1.45}
+
+.footlinks{display:flex; flex-wrap:wrap; gap:8px 16px; padding:22px 0 4px; border-top:1px solid var(--line); margin-top:24px}
+.footlinks button{font-size:.8rem; color:var(--muted)}
+.footlinks button:active{color:var(--brand)}
+
+/* ---------- auth ---------- */
+.authwrap{padding-top:18px; padding-bottom:28px}
+.is-auth .card{backdrop-filter:blur(8px); background:color-mix(in srgb, var(--surface) 92%, transparent)}
+.authmark{
+  width:58px; height:58px; border-radius:19px; display:grid; place-items:center; margin-bottom:16px;
+  background:var(--grad-brand); color:var(--on-brand);
+  box-shadow:0 14px 32px -16px color-mix(in srgb, var(--brand) 92%, transparent);
+}
+.authmark svg{width:28px; height:28px}
+.orline{display:flex; align-items:center; gap:12px; margin:16px 0; color:var(--muted); font-size:.74rem}
+.orline::before,.orline::after{content:''; flex:1; height:1px; background:var(--line)}
+
+.otp{display:grid; grid-template-columns:repeat(6,1fr); gap:8px}
+.otp__box{
+  aspect-ratio:1; text-align:center; font-family:var(--font-head); font-size:1.35rem; color:var(--ink);
+  border-radius:var(--r-md); border:1.4px solid var(--line); background:var(--surface-2);
+  transition:border-color var(--t-fast) ease, box-shadow var(--t-fast) ease, transform var(--t-fast) var(--e-spring);
+}
+.otp__box:focus{
+  outline:none; border-color:var(--action); background:var(--surface); transform:translateY(-2px);
+  box-shadow:0 0 0 4px color-mix(in srgb, var(--action) 16%, transparent);
+}
+
+/* ---------- quick action grid ---------- */
+.quick{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px}
+.quick__i{
+  display:flex; flex-direction:column; align-items:center; gap:7px; padding:14px 6px;
+  border-radius:var(--r-md); background:var(--surface); border:1px solid var(--line);
+  box-shadow:var(--shadow); font-size:.74rem; color:var(--body); text-align:center;
+  transition:transform var(--t-fast) var(--e-spring), box-shadow var(--t-mid) ease;
+  animation:rv-in .5s var(--e-out) backwards; animation-delay:calc(var(--i,0) * 55ms);
+}
+.quick__i:active{transform:scale(.94); box-shadow:none}
+.quick__i > span{
+  width:36px; height:36px; border-radius:12px; display:grid; place-items:center;
+  background:var(--brand-tint); color:var(--brand);
+}
+.quick__i > span svg{width:19px; height:19px}
+
+/* ---------- profile header ---------- */
+.profhead{position:relative}
+.profhead__media{position:relative}
+.profhead__img{aspect-ratio:4/5}
+.profhead__over{position:absolute; left:0; right:0; bottom:0; z-index:5; padding:16px var(--gutter) 14px; color:#fff}
+.profhead__over h2{color:#fff; font-size:1.5rem}
+.profhead__over p{opacity:.9; font-size:.86rem}
+.profhead__over .chip{background:rgba(255,255,255,.2); color:#fff; border-color:transparent}
+.profhead__over .pill{background:rgba(255,255,255,.22); color:#fff}
+.profhead__thumbs{display:flex; gap:8px; padding:12px var(--gutter) 0; overflow-x:auto; scrollbar-width:none}
+.profhead__thumbs::-webkit-scrollbar{display:none}
+.thumb{width:62px; height:62px; border-radius:var(--r-md); flex:0 0 auto}
+.thumb::after{display:none}
+
+/* ---------- upload boxes ---------- */
+.uploadbox{
+  display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center;
+  padding:22px 16px; border-radius:var(--r-md); background:var(--surface-2);
+  border:1.6px dashed var(--line-strong); color:var(--body); width:100%;
+  transition:background var(--t-fast) ease, transform var(--t-fast) var(--e-spring);
+  animation:rv-in .5s var(--e-out) backwards; animation-delay:calc(var(--i,0) * 60ms);
+}
+.uploadbox:active{transform:scale(.98); background:var(--surface-3)}
+.uploadbox > span:first-child{
+  width:40px; height:40px; border-radius:99px; display:grid; place-items:center;
+  background:var(--brand-tint); color:var(--brand);
+}
+.uploadbox > span:first-child svg{width:20px; height:20px}
+.uploadbox b{color:var(--ink)}
+
+.addphoto{
+  display:grid; place-items:center; aspect-ratio:3/4; border-radius:var(--r-lg);
+  background:var(--surface-2); border:1.6px dashed var(--line-strong); color:var(--muted);
+}
+.addphoto span{display:grid; place-items:center; gap:6px; font-size:.78rem}
+.addphoto svg{width:24px; height:24px}
+
+/* ---------- selfie ring ---------- */
+.selfie{position:relative; width:220px; height:220px; margin:10px auto 0}
+.selfie__img{width:100%; height:100%; border-radius:99px}
+.selfie__img::after{display:none}
+.selfie__ring{
+  position:absolute; inset:-10px; border-radius:99px; pointer-events:none;
+  border:3px dashed var(--action); animation:spin 14s linear infinite;
+}
+
+/* ---------- poster ---------- */
+.poster{
+  border-radius:var(--r-lg); overflow:hidden; background:var(--surface);
+  border:1px solid var(--line-strong); box-shadow:var(--shadow-lift);
+}
+.poster__img{aspect-ratio:4/3}
+.poster__body{padding:16px}
+
+/* ---------- referral code ---------- */
+.codebox{
+  display:flex; align-items:center; gap:10px; justify-content:space-between;
+  padding:10px 10px 10px 16px; border-radius:var(--r-pill);
+  background:var(--surface); border:1.4px dashed var(--line-strong);
+}
+.codebox code{font-family:var(--font-mono); letter-spacing:.2em; color:var(--ink); font-size:.94rem}
+
+/* ---------- the "it's a match" note ---------- */
+.matchnote{
+  align-self:center; text-align:center; padding:16px 20px; border-radius:var(--r-lg);
+  background:var(--brand-tint); border:1px solid color-mix(in srgb, var(--brand) 22%, transparent);
+  margin:8px 0 14px; max-width:86%;
+}
+.matchnote svg{width:26px; height:26px; color:var(--brand); margin:0 auto 6px}
+.matchnote b{display:block; color:var(--ink)}
+.matchnote span{display:block; font-size:.78rem; color:var(--muted)}
+
+/* ---------- chat screens ---------- */
+.is-chat .scroller{padding-bottom:10px; display:flex; flex-direction:column; justify-content:flex-end}
+.is-chat .thread{margin-top:auto}
+
+/* ---------- the family video meeting ---------- */
+/* The meeting fills the body but not the status bar, so the scroller is the
+   positioning context here rather than the screen. The room is always dark —
+   it is a video call, not a page — so it takes literals, not theme tokens. */
+.is-meet .scroller{padding:0; position:relative; overflow:hidden}
+.is-meet .statusbar{background:#0B0508; color:#fff}
+.meet{position:absolute; inset:0; display:flex; flex-direction:column; background:#0B0508; color:#fff}
+.meet__grid{flex:1; display:grid; grid-template-columns:1fr 1fr; gap:3px; padding:3px}
+.meet__tile{position:relative; border-radius:var(--r-md); overflow:hidden}
+.meet__tile .ph{position:absolute; inset:0}
+.meet__name{
+  position:absolute; z-index:5; left:8px; bottom:8px; display:flex; align-items:center; gap:5px;
+  padding:3px 9px; border-radius:99px; background:rgba(0,0,0,.42); backdrop-filter:blur(6px);
+  color:#fff; font-size:.7rem;
+}
+.meet__name svg{width:12px; height:12px}
+.meet__bar{
+  flex:0 0 auto; display:flex; gap:14px; justify-content:center;
+  padding:18px 0 calc(22px + var(--safe-bottom)); color:#fff; background:#0B0508;
+}
+.meet__bar .callbtn{background:rgba(255,255,255,.14)}
+.meet__bar .callbtn.end{background:var(--bad)}
+
+/* ---------- admin sparkline ---------- */
+.spark{display:flex; align-items:flex-end; gap:6px; height:76px}
+.spark i{
+  flex:1; height:var(--h); border-radius:5px 5px 2px 2px; background:var(--grad-brand);
+  transform-origin:bottom; animation:bar-grow .7s var(--e-out) backwards;
+}
+@keyframes bar-grow{from{transform:scaleY(.04); opacity:.3}}
+
+/* ---------- accordion body ---------- */
+.acc-body{overflow:hidden; transition:max-height .38s var(--e-out)}
+.lrow[data-accordion] svg{transition:transform var(--t-mid) var(--e-out)}
+
+/* ---------- misc ---------- */
+.chip button{display:inline-grid; place-items:center; opacity:.6}
+.chip button svg{width:12px; height:12px}
