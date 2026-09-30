@@ -9,7 +9,10 @@
 <meta name="description" content="SheTu / সেতু matrimony app — animated mobile UI prototype. HTML, CSS and vanilla JS only; every screen is dummy data and every image a generated placeholder.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%237A1F3D'/%3E%3Cpath d='M20 42c0-8 24-8 24-16a8 8 0 0 0-16 0' fill='none' stroke='%23FFF0F3' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="assets/img/favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/img/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
 
 <!--
   Fonts come from Google when the network allows it; the stacks in tokens.css
@@ -38,12 +41,9 @@
       <span class="splash__ring"></span>
       <span class="splash__ring" style="animation-delay:.6s"></span>
       <div class="splash__mark" style="text-align:center">
-        <svg viewBox="0 0 24 24" width="62" height="62" fill="none" stroke="currentColor"
-             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="9" cy="14.4" r="4.4"/><circle cx="15" cy="14.4" r="4.4"/>
-          <path d="m7.4 8.6 1.6-3.2 1.6 3.2M13.4 8.6 15 5.4l1.6 3.2"/>
-        </svg>
-        <h1 style="color:inherit;font-size:2.2rem;margin-top:10px">সেতু</h1>
+        <img class="splash__icon" src="assets/img/icon-192.png" width="104" height="104"
+             alt="সেতু" fetchpriority="high" decoding="async">
+        <h1 style="color:inherit;font-size:2.2rem;margin-top:12px">সেতু</h1>
         <p style="opacity:.82;letter-spacing:.26em;font-size:.68rem;text-transform:uppercase">SheTu</p>
       </div>
     </div>

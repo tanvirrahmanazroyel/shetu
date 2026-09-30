@@ -100,15 +100,27 @@ compositor a few layers and the main thread nothing.
 
 ## Images
 
-**There are no image files in this build.** Every portrait, cover and thumbnail is a
-generated CSS sheet — a brand-ramp gradient, a soft drifting vignette and a monogram —
+**The app icon is the only image file in this build.** Every portrait, cover and thumbnail
+is a generated CSS sheet — a brand-ramp gradient, a soft drifting vignette and a monogram —
 marked as a sample. Swap `UI.photo()` in `assets/js/ui.js` for real `<img>` tags when real
 photography exists.
+
+## Icon and install
+
+`assets/img/` holds the app icon at 512, 192, 180 and 64, plus a favicon. It is the tab
+icon, the splash mark and the brand mark in the app bars, so the thing on a home screen and
+the thing in the corner of the bar are the same object.
+
+`site.webmanifest` makes the page installable: **Add to Home Screen** on iOS or **Install
+app** on Android gives a standalone, portrait window with no browser chrome, the icon on
+the home screen, and long-press shortcuts straight to search, messages and পরিচয়.
 
 ## Layout
 
 ```
 index.html                  the whole app
+site.webmanifest            name, colours and icons, so it installs to a home screen
+assets/img/                 the app icon (the only image files here)
 assets/css/tokens.css       palette, typography, geometry, motion tokens
 assets/css/base.css         shell, device frame, app bar, tab bar, forms, buttons
 assets/css/components.css   cards, lists, chips, placeholders, sheets, chat, deck, plans

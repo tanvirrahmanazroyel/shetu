@@ -1,0 +1,22 @@
+{
+  "name": "সেতু — SheTu",
+  "short_name": "সেতু",
+  "description": "দুই পরিবারের মাঝে একটি সেতু — যাচাই করা প্রোফাইল, পরিবারকে সঙ্গে নিয়ে পরিচয়।",
+  "lang": "bn",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7E7EC",
+  "theme_color": "#7A1F3D",
+  "icons": [
+    { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "খুঁজুন",  "url": "./index.html#search" },
+    { "name": "বার্তা",  "url": "./index.html#mailbox" },
+    { "name": "পরিচয়",  "url": "./index.html#porichoy" }
+  ]
+}
